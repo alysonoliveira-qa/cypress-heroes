@@ -5,6 +5,8 @@ export default defineConfig({
   projectId: 'nd8nd1',
   e2e: {
     baseUrl: 'http://localhost:3000',
+    viewportWidth:1440,
+    viewportHeight:900,
     setupNodeEvents(on, config) {
       on('task', {
         createHero,

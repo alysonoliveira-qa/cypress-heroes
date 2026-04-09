@@ -42,6 +42,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       login: (username: string, password: string) => {};
+      isLoggedIn(): Cypress.Chainable<void>
       getByCy<E extends Node = HTMLElement>(
         cyId: string
       ): Cypress.Chainable<JQuery<E>>;
@@ -52,16 +53,29 @@ declare global {
   }
 }
 
-Cypress.Commands.add('login', (username: string, password: string) => {
-  cy.session(`login-${username}`, () => {
-    cy.visit('/');
-    cy.get('button').contains('Login').click();
-    cy.get('input[type="email"]').type(username);
-    cy.get('input[type="password"]').type(password);
-    cy.get('button').contains('Sign in').click();
-    cy.contains('button', 'Logout', { log: false }).should('be.visible');
-  });
+Cypress.Commands.add('login', (email:string, password:string) => {
+  cy.visit('/')
+
+  cy.contains('Login').click()
+  cy.get('input[type=email]').type(email)
+  cy.get('input[type=password]').type(password)
+  cy.contains('Sign in').click()
 });
+
+Cypress.Commands.add('isLoggedIn', () => {
+  cy.contains('button', 'Logout').should('be.visible')
+});
+
+// Cypress.Commands.add('login', (username: string, password: string) => {
+//   cy.session(`login-${username}`, () => {
+//     cy.visit('/');
+//     cy.get('button').contains('Login').click();
+//     cy.get('input[type="email"]').type(username);
+//     cy.get('input[type="password"]').type(password);
+//     cy.get('button').contains('Sign in').click();
+//     cy.contains('button', 'Logout', { log: false }).should('be.visible');
+//   });
+// });
 
 Cypress.Commands.add('getByCy', (cyId: string) => {
   return cy.get(`[data-cy='${cyId}'`);
