@@ -37,16 +37,19 @@ The main goal is to demonstrate a **Quality Engineering mindset**, focusing on s
 ---
 
 ## 🧱 Project Structure
+
+```text
 cypress/
 └── e2e/
-└── heroes/
-├── home.cy.ts
-├── login.cy.ts
-└── heroCreate.cy.ts
-
+    └── heroes/
+        ├── home.cy.ts
+        ├── login.cy.ts
+        └── heroCreate.cy.ts
+        
 cypress.config.ts
 cypress/support/commands.ts
 
+```
 ---
 
 ## 🧠 Test Strategy
