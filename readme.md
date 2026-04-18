@@ -1,3 +1,116 @@
+# 🧪 QA Automation – Cypress Heroes (by Alyson Oliveira)
+
+This section documents the end-to-end test automation implemented for the Heroes feature using Cypress.
+
+---
+
+## 🚀 Objective
+
+Automate critical user flows and validate application behavior through UI testing, focusing on scalability, maintainability, and real-world QA practices.
+
+---
+
+## 🧪 Test Coverage (CRUD)
+
+### ✅ Create Hero
+- Create hero with valid data
+- Validate hero appears in the list
+
+### 📖 Read Heroes
+- Validate heroes list rendering
+- Validate created hero is displayed
+
+### ✏️ Update Hero
+- Edit existing hero data
+- Validate updated information in UI
+- Validate persistence after page reload
+
+### 🗑️ Delete Hero
+- Delete an existing hero
+- Validate removal from the list
+
+---
+
+## 🧠 QA Practices Applied
+
+### 🔹 Test Isolation
+Each test generates its own data dynamically:
+
+```ts
+'Hero' + Date.now()
+```
+### 🔹 Custom Commands
+Reusable actions encapsulated:
+
+```ts
+cy.createHero(hero)
+```
+### 🔹 Factory Pattern
+Centralized test data creation:
+
+```ts
+const hero = heroFactory()
+```
+### 🔹 Stable Selectors
+Use of data-cy attributes to avoid flaky tests.
+
+### 🔹 Scoped Interactions
+Use of .within() to ensure correct element targeting.
+
+---
+
+## 🧱 Project Structure
+
+```text
+cypress/
+  e2e/heroes/
+    createHero.cy.ts
+    editHero.cy.ts
+    deleteHero.cy.ts
+    listHeroes.cy.ts
+
+  support/
+    commands.ts
+    heroFactory.ts
+```
+---
+
+## ⚠️ Challenges & Solutions
+
+❌ Issue: TypeScript errors in custom commands
+
+✔ Solution: Proper typing using index.d.ts
+
+❌ Issue: Fragile selectors
+
+✔ Solution: Replaced with data-cy
+
+❌ Issue: Test data conflicts
+
+✔ Solution: Dynamic data using Date.now()
+
+❌ Issue: Incorrect command usage
+
+✔ Solution: Refactored logic using custom commands
+
+---
+
+## 🚀 Next Steps
+
+API validation with cy.intercept
+CI integration (GitHub Actions)
+Advanced test architecture improvements
+
+---
+
+## 👨‍💻 Author
+
+Alyson Oliveira
+QA Engineer transitioning to Quality Engineering 🚀
+
+---
+
+
 # Cypress Heroes Demo Application
 
 This is a demo application that shows how to use Cypress to run end-to-end,
