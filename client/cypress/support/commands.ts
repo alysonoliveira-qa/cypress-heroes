@@ -35,7 +35,13 @@
 //     }
 //   }
 // }
-
+type Hero = {
+  name: string
+  price: string
+  fans: string
+  saves: string
+  power: string
+}
 import Prisma from '@prisma/client';
 
 declare global {
@@ -47,7 +53,13 @@ declare global {
         cyId: string
       ): Cypress.Chainable<JQuery<E>>;
       resetDb(): void;
-      createHero(): Cypress.Chainable<Prisma.Hero>;
+      createHero(hero: {
+        name: string
+        price: string
+        fans: string
+        saves: string
+        power: string
+      }): Cypress.Chainable<void>
       deleteHero(id: number): void;
     }
   }
@@ -77,6 +89,20 @@ Cypress.Commands.add('isLoggedIn', () => {
 //   });
 // });
 
+
+Cypress.Commands.add('createHero', (hero: Hero) => {
+  cy.contains('button', 'Create New Hero').click()
+  
+    //fill date
+        cy.get('[data-cy="nameInput"]').type(hero.name)
+        cy.get('[data-cy="priceInput"]').type(hero.price)
+        cy.get('[data-cy="fansInput"]').type(hero.fans)
+        cy.get('[data-cy="savesInput"]').type(hero.saves)
+        cy.get('[data-cy="powersSelect"]').select(hero.power)
+    //submit
+        cy.contains('button', 'Submit').click()
+})
+
 Cypress.Commands.add('getByCy', (cyId: string) => {
   return cy.get(`[data-cy='${cyId}'`);
 });
@@ -87,14 +113,14 @@ Cypress.Commands.add('resetDb', () => {
   );
 });
 
-Cypress.Commands.add('createHero', () => {
-  return cy.task('createHero').then((newHero: any) => {
-    delete newHero.createdAt;
-    delete newHero.updatedAt;
-    delete newHero.avatar;
-    return cy.wrap<Prisma.Hero>(newHero).as('newHero');
-  });
-});
+// Cypress.Commands.add('createHero', () => {
+//   return cy.task('createHero').then((newHero: any) => {
+//     delete newHero.createdAt;
+//     delete newHero.updatedAt;
+//     delete newHero.avatar;
+//     return cy.wrap<Prisma.Hero>(newHero).as('newHero');
+//   });
+// });
 
 Cypress.Commands.add('deleteHero', (id: number) => {
   cy.task('deleteHero', id);
