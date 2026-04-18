@@ -15,6 +15,18 @@ All tests are written using **Cypress**, following best practices for scalabilit
 
 ---
 
+## 📚 QA Documentation
+
+Detailed QA artifacts are available in:
+
+- 📄 Test Cases
+- 🐞 Bug Reports
+- 🔍 Exploratory Sessions
+
+👉 [Access full documentation](./client/docs)
+
+---
+
 ## ⚙️ Tech Stack
 
 * Cypress
