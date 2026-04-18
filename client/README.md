@@ -23,7 +23,7 @@ Detailed QA artifacts are available in:
 - 🐞 Bug Reports
 - 🔍 Exploratory Sessions
 
-👉 [Access full documentation](./client/docs)
+👉 [Access full documentation](./docs)
 
 ---
 
